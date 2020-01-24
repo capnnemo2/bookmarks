@@ -72,9 +72,14 @@ export default class AddBookmark extends React.Component {
     }
 
     render() {
+        const error = this.state.error
+            ? <div className='error'>{this.state.error}</div>
+            : '';
+
         return (
             <div className='addbookmark'>
                 <h2>Add Bookmark</h2>
+                {error}
                 <form className='addbookmark__form'>
                     <label htmlFor='title'>Title:</label>
                     <input
