@@ -37,8 +37,7 @@ export default class AddBookmark extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const {title, url, description, rating} = this.state;
-        const bookmark = {title, url, description, rating};
+        const bookmark = (({title, url, description, rating}) => ({title, url, description, rating}))(this.state);
         const postUrl = 'https://tf-ed-bookmarks-api.herokuapp.com/v3/bookmarks';
         const options = {
             method: 'POST',
