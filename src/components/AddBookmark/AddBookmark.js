@@ -36,6 +36,7 @@ export default class AddBookmark extends React.Component {
     }
 
     handleSubmit(e) {
+        console.log(`ran handleSubmit`);
         e.preventDefault();
         const bookmark = (({title, url, description, rating}) => ({title, url, description, rating}))(this.state);
         const postUrl = 'https://tf-ed-bookmarks-api.herokuapp.com/v3/bookmarks';
@@ -123,8 +124,8 @@ export default class AddBookmark extends React.Component {
                     />
 
                     <div className='addbookmark__buttons'>
-                        <button>Cancel</button>
-                        <button type='submit'>Save</button>
+                        <button onClick={e => this.props.showForm(false)}>Cancel</button>
+                        <button type='submit' onClick={e => this.handleSubmit(e)}>Save</button>
                     </div>
 
                 </form>
