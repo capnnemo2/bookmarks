@@ -18,6 +18,13 @@ export default class App extends React.Component {
     });
   }
 
+  addBookmark(bookmark) {
+    this.setState({
+      bookmarks: [...this.state.bookmarks, bookmark],
+      showAddForm: false
+    });
+  }
+
   componentDidMount() {
     const url = 'https://tf-ed-bookmarks-api.herokuapp.com/v3/bookmarks';
     const options = {
@@ -55,7 +62,7 @@ export default class App extends React.Component {
 
   render() {
     const page = this.state.showAddForm
-      ? <AddBookmark />
+      ? <AddBookmark showForm={show => this.setShowAddForm(show)} handleAdd={bookmark => this.addBookmark(bookmark)} />
       : <BookmarkApp bookmarks={this.state.bookmarks} showForm={show => this.setShowAddForm(show)} />
     return (
       <div className='App'>
