@@ -4,9 +4,9 @@ export default class AddBookmark extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            title: '',
-            url: '',
-            description: '',
+            title: "",
+            url: "",
+            description: "",
             rating: 1
         };
     }
@@ -35,7 +35,7 @@ export default class AddBookmark extends React.Component {
         });
     }
 
-    handleSubmit(e) {
+    handleSubmit = (e) => {
         console.log(`ran handleSubmit`);
         e.preventDefault();
         const bookmark = (({title, url, description, rating}) => ({title, url, description, rating}))(this.state);
@@ -81,7 +81,7 @@ export default class AddBookmark extends React.Component {
             <div className='addbookmark'>
                 <h2>Add Bookmark</h2>
                 {error}
-                <form className='addbookmark__form'>
+                <form className='addbookmark__form' onSubmit={this.handleSubmit}>
                     <label htmlFor='title'>Title:</label>
                     <input
                         type='text'
@@ -125,7 +125,7 @@ export default class AddBookmark extends React.Component {
 
                     <div className='addbookmark__buttons'>
                         <button onClick={e => this.props.showForm(false)}>Cancel</button>
-                        <button type='submit' onClick={e => this.handleSubmit(e)}>Save</button>
+                        <button type='submit'>Save</button>
                     </div>
 
                 </form>
