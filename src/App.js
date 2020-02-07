@@ -1,7 +1,7 @@
-import React from 'react';
-import BookmarkApp from './components/BookmarkApp/BookmarkApp';
-import AddBookmark from './components/AddBookmark/AddBookmark';
-
+import React from "react";
+import BookmarkApp from "./components/BookmarkApp/BookmarkApp";
+import AddBookmark from "./components/AddBookmark/AddBookmark";
+import config from "./config";
 
 export default class App extends React.Component {
   constructor(props) {
@@ -26,19 +26,19 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    const url = 'https://tf-ed-bookmarks-api.herokuapp.com/v3/bookmarks';
+    const url = config.API_ENDPOINT;
     const options = {
-      method: 'GET',
+      method: "GET",
       headers: {
-        "Authorization": "Bearer $2a$10$6.wiFdDtxlX4ATITf9J69uK8VbFnSt/YBHa1qtVJmvIfnHGm8RHry",
+        Authorization: `Bearer ${config.API_KEY}`,
         "Content-type": "application/json"
       }
     };
 
     fetch(url, options)
       .then(res => {
-        if(!res.ok) {
-          throw new Error('You are not a Jedi, stop trying to use the force.');
+        if (!res.ok) {
+          throw new Error("You are not a Jedi, stop trying to use the force.");
         }
         return res;
       })
@@ -54,25 +54,20 @@ export default class App extends React.Component {
           error: err.message
         });
       });
-        
-        
-        
-      
   }
 
   render() {
-    const page = this.state.showAddForm
-      ? <AddBookmark
-          showForm={show => this.setShowAddForm(show)}
-          handleAdd={bookmark => this.addBookmark(bookmark)} />
-      : <BookmarkApp
-          bookmarks={this.state.bookmarks}
-          showForm={show => this.setShowAddForm(show)} />
-    return (
-      <div className='App'>
-        {page}
-      </div>
-    )
+    const page = this.state.showAddForm ? (
+      <AddBookmark
+        showForm={show => this.setShowAddForm(show)}
+        handleAdd={bookmark => this.addBookmark(bookmark)}
+      />
+    ) : (
+      <BookmarkApp
+        bookmarks={this.state.bookmarks}
+        showForm={show => this.setShowAddForm(show)}
+      />
+    );
+    return <div className="App">{page}</div>;
   }
 }
-
